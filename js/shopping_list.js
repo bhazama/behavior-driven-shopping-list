@@ -5,13 +5,40 @@ class ShoppingList {
     this.items = [];
   }
 
-  addItem(ShoppingListItem){
-    this.ShoppingListItem =ShoppingListItem;
-    this.items.push(ShoppingListItem);
+  addItem(shoppingItem){
+    //this.ShoppingListItem =ShoppingListItem;
+    if(shoppingItem instanceof ShoppingListItem){
+    this.items.push(shoppingItem);}
+    else{
+      return "not a valid input";
+    }
     //console.log(ShoppingListItem, this.items);
   }
 
+  removeItem(shoppingItem){
+    let itemArr = this.items;
+    if(itemArr.includes(shoppingItem)){
+      let itemIndex = itemArr.indexOf(shoppingItem);
+      itemArr.splice(itemIndex,1);
+    } else if(!shoppingItem && itemArr.length > 0){
+      itemArr.splice(itemArr.length - 1, 1);
+    }else {
+      return "Not a valid input";
+    }
 
+  }
+
+  render(){
+    let itemArr = [];
+    for(let i = 0; i < this.items.length; i++){
+      itemArr.push(this.items[i].render(i));
+      // console.log(itemArr);
+    }
+  var strList = itemArr.join(' ');
+  console.log(strList);
+  return '<ul>' + strList + '</ul>';
+
+  }
 
 
 
@@ -19,9 +46,13 @@ class ShoppingList {
 }
 
 
-var newList = new ShoppingList();
+// var list = new ShoppingList();
+// let greenStuff = new ShoppingListItem("broccoli", "vegetable");
+// let blueStuff = new ShoppingListItem("blueberries", "fruit");
+//   list.addItem(greenStuff);
+//   list.addItem(blueStuff);
 
-newList.addItem();
+// console.log(newList.render());
 
 
 
